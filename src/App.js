@@ -32,7 +32,6 @@ class App extends Component {
           duration={ 3000 }
           target={ this.state.person }
           times={ 5 }
-          // onEnd={this.onComplete}
           >
           {
             this.state.names.map((value, i) =>
