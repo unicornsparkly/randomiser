@@ -41,6 +41,34 @@ class App extends Component {
             )
           }
         </Slot>
+        <Slot
+          className="slot"
+          duration={ 3500 }
+          target={ this.state.person }
+          times={ 5 }
+          >
+          {
+            this.state.names.map((value, i) =>
+              <div key={ i+1 } style={ style }>
+                {value}
+              </div>
+            )
+          }
+        </Slot>
+        <Slot
+          className="slot"
+          duration={ 4500 }
+          target={ this.state.person }
+          times={ 5 }
+          >
+          {
+            this.state.names.map((value, i) =>
+              <div key={ i+1 } style={ style }>
+                {value}
+              </div>
+            )
+          }
+        </Slot>
       <button onClick={this.onClick}> GO! </button>
       </div >
     );

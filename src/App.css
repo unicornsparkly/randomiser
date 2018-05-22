@@ -23,7 +23,9 @@
 }
 
 .slot {
-  height: 40px;
+  height: 80px;
+  width: 30%;
+  display: inline-block;
 }
 
 @keyframes App-logo-spin {
