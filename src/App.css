@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-image: url('./images/bkgrd.gif');
+  background-size: 100vw 100vh;
+  height: 100vh;
 }
 
 .App-logo {
@@ -23,12 +26,33 @@
 }
 
 .slot {
-  height: 80px;
-  width: 30%;
+  height: 429px;
+  width: 250px;
+  background: white;
   display: inline-block;
+  flex-direction: row;
+  align-self: center;
+  margin: 10px 17px 0;
+  border-radius: 12px;
+  border: 8px ridge;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.slot img { width: 250px }
+
+.slot-machine {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  margin-top: 30px;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  background-image: url('./images/spin.png');
+  background-size: 200px 200px;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
