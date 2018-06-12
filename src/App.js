@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import Slot from 'react-slot-machine';
-import './App.css';
+// import easing from 'easing-functions';
+import Slot from './Slot.jsx';
 import queryString from 'query-string';
+
+import './App.css';
 import alex from './images/alex.png';
 import rob from './images/rob.png';
 import jiten from './images/jiten.png';
@@ -12,89 +14,94 @@ import rik from './images/rik.png';
 import questionMark from './images/questionMark.gif';
 
 const namesMapper = { 
-  '???': questionMark,
-  'alex': alex,
-  'rob': rob,
-  'jiten': jiten,
-  'raluca': raluca,
-  'craig': craig,
-  'shane': shane,
-  'rik': rik
+	'???': questionMark,
+	'alex': alex,
+	'rob': rob,
+	'jiten': jiten,
+	'raluca': raluca,
+	'craig': craig,
+	'shane': shane,
+	'rik': rik
 };
 
 
 class App extends Component {
-  constructor() {
-    super();
+	constructor() {
+		super();
 
-    const { names = '' } = queryString.parse(window.location.search);
+		const { names = '' } = queryString.parse(window.location.search);
+		this.nameArray = names.split(',');
 
-    this.state = {
-      names: names.split(','),
-      person: 0
-    }
+		this.state = {
+			names: this.nameArray.concat(this.nameArray).concat(this.nameArray).concat(this.nameArray).concat(this.nameArray).concat(this.nameArray).concat(this.nameArray).concat(this.nameArray),
+			person: 0,
+			times: 0
+		}
 
-    this.onClick = this.onClick.bind(this);
-  }
+		this.onClick = this.onClick.bind(this);
+	}
 
-  onClick() {
-    this.setState ({ 
-      person: Math.floor(Math.random() * (this.state.names.length - 1)) + 1
-    })
-  }
-  
-  render() {
-    const style={ height: '300px', width: '250px', lineHeight: '34px' }
-    return (
-      <div className="App">
-      <div className="slot-machine">
-        <Slot
-          className="slot"
-          duration={ 3000 }
-          target={ this.state.person }
-          times={ 4 }
-          >
-          {
-            this.state.names.map((value, i) =>
-              <div key={ i+1 } style={ style }>
-                <img alt={ value } src={ namesMapper[value] }></img>
-              </div>
-            )
-          }
-        </Slot>
-        <Slot
-          className="slot"
-          duration={ 3500 }
-          target={ this.state.person }
-          times={ 4 }
-          >
-          {
-            this.state.names.map((value, i) =>
-              <div key={ i+1 } style={ style }>
-                <img alt={ value } src={ namesMapper[value] }></img>
-              </div>
-            )
-          }
-        </Slot>
-        <Slot
-          className="slot"
-          duration={ 4500 }
-          target={ this.state.person }
-          times={ 4 }
-          >
-          {
-            this.state.names.map((value, i) =>
-              <div key={ i+1 } style={ style }>
-                <img alt={ value } src={ namesMapper[value] }></img>
-              </div>
-            )
-          }
-        </Slot>
-      </div>
-      <button onClick={this.onClick}></button>
-      </div >
-    );
-  }
+	onClick() {
+		const index =	Math.floor(Math.random() * (this.nameArray.length));
+		console.log(index);
+		this.setState ({ 
+			person: index + 1
+		})
+	}
+	
+	render() {
+		const style={ height: '300px', width: '250px', lineHeight: '34px' };
+
+		return (
+			<div className="App">
+			<div className="slot-machine">
+				<Slot
+					className="slot"
+					duration={ 3000 }
+ 					target={ this.state.person }
+					times={ this.state.times }
+					>
+					{
+						this.state.names.map((value, i) =>
+							<div key={ i+1 } style={ style }>
+								<img alt={ value } src={ namesMapper[value] }></img>
+							</div>
+						)
+					}
+				</Slot>
+				<Slot
+					className="slot"
+					duration={ 3500 }
+					target={ this.state.person }
+					times={ this.state.times }
+					>
+					{
+						this.state.names.map((value, i) =>
+							<div key={ i+1 } style={ style }>
+								<img alt={ value } src={ namesMapper[value] }></img>
+							</div>
+						)
+					}
+				</Slot>
+				<Slot
+					className="slot"
+					duration={ 4500 }
+					target={ this.state.person }
+					times={ this.state.times }
+					>
+					{
+						this.state.names.map((value, i) =>
+							<div key={ i+1 } style={ style }>
+								<img alt={ value } src={ namesMapper[value] }></img>
+							</div>
+						)
+					}
+				</Slot>
+			</div>
+			<button onClick={this.onClick}></button>
+			</div >
+		);
+	}
 }
 
 export default App;
