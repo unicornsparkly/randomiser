@@ -12,6 +12,7 @@ import craig from './images/craig.png';
 import shane from './images/shane.png';
 import rik from './images/rik.png';
 import questionMark from './images/questionMark.gif';
+import fetchJoke from './apiService';
 
 const namesMapper = { 
 	'???': questionMark,
@@ -35,18 +36,26 @@ class App extends Component {
 		this.state = {
 			names: this.nameArray.concat(this.nameArray).concat(this.nameArray).concat(this.nameArray).concat(this.nameArray).concat(this.nameArray).concat(this.nameArray).concat(this.nameArray),
 			person: 0,
-			times: 0
+			times: 0,
+			joke: ''
 		}
 
 		this.onClick = this.onClick.bind(this);
+		this.onJokeHandler = this.onJokeHandler.bind(this);
+	}
+
+	onJokeHandler = () => {
+		fetchJoke().then(joke => {
+			this.setState({ joke })
+		});
 	}
 
 	onClick() {
 		const index =	Math.floor(Math.random() * (this.nameArray.length));
-		console.log(index);
 		this.setState ({ 
-			person: index + 1
-		})
+			person: index + 1,
+			joke: ''
+		});
 	}
 	
 	render() {
@@ -88,6 +97,7 @@ class App extends Component {
 					duration={ 4500 }
 					target={ this.state.person }
 					times={ this.state.times }
+					onEnd={ this.onJokeHandler }
 					>
 					{
 						this.state.names.map((value, i) =>
@@ -99,6 +109,7 @@ class App extends Component {
 				</Slot>
 			</div>
 			<button onClick={this.onClick}></button>
+			<p className="joke">{ this.state.joke }</p>
 			</div >
 		);
 	}

@@ -44,7 +44,8 @@ class Slot extends React.Component {
 
             this.FrameRef.scrollTop = scrollPosition;
         })
-        .start();
+        .onComplete(this.props.onEnd)
+        .start()
   }
 
   render() {
